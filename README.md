@@ -66,6 +66,27 @@ rumour-verification-system/
 
 ---
 
+## 📊 Model Performance
+
+Evaluated on a **held-out test set of 8,980 articles** (20% of full dataset) using `train_test_split` with `random_state=42`.
+
+| Metric | FAKE | REAL | Overall |
+|---|---|---|---|
+| **Accuracy** | — | — | **99.43%** |
+| **Precision** | 99% | 99% | 99% |
+| **Recall** | 99% | 99% | 99% |
+| **F1-Score** | 99% | 99% | 99% |
+| **Support** | 4,710 | 4,270 | 8,980 |
+
+**Algorithm:** Passive Aggressive Classifier  
+**Vectorisation:** TF-IDF (stop words removed, max_df=0.7)  
+**Dataset:** 44,898 articles — Fake.csv + True.csv (Kaggle)  
+**Train / Test Split:** 80% / 20%
+
+> The model achieves balanced precision and recall across both classes, meaning it is equally reliable at catching fake news and confirming real news — with no significant bias toward either class.
+
+---
+
 ## 🧠 How the Prediction Works
 
 1. Input text is vectorised using the saved **TF-IDF** transformer (`tfidf.pkl`)
@@ -92,8 +113,8 @@ rumour-verification-system/
 ## 📌 Known Limitations
 
 - NewsAPI free tier: **100 requests/day**, country filter unavailable in developer mode
+- Model trained on US political news (2016–2018) — may show reduced accuracy on science or climate articles due to dataset bias
 - Some URLs (paywalled or JS-rendered) cannot be extracted by `newspaper3k` — use Tab 2 as fallback
-- Model accuracy depends on the dataset used to train `model.pkl`
 
 ---
 
