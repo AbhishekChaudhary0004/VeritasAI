@@ -12,8 +12,8 @@ def load_model():
 
 @st.cache_resource
 def load_api():
-    return NewsApiClient(api_key="NEWSAPI_KEY")
-
+    return NewsApiClient(api_key=st.secrets["NEWSAPI_KEY"])
+    
 model, tfidf = load_model()
 newsapi      = load_api()
 
